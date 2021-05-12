@@ -9,7 +9,7 @@ typedef unsigned short hword;	// half word
 #define	LCD_MODE3	3			// Video Mode 3
 #define	LCD_WIDTH	240
 #define LCD_HEIGHT	160
-#define	COLOR_MAX	31
+#define	CMAX		31			// Max Color Value
 
 typedef struct {
         hword r;
@@ -29,10 +29,11 @@ Vec4 ivec4(hword r, hword g, hword b, hword a) {
 
 Vec4 gl_FragColor = { 0, 0, 0, 0 };  
 
+
 void PseudoShader() {
 	// 240x160 screen and color values in 0..31
 
-	gl_FragColor = ivec4(15, 15, 15, 1);
+	gl_FragColor = ivec4(CMAX/2, CMAX/2, CMAX/2, 1);
 
 }
 
