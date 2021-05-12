@@ -2,7 +2,6 @@ rgb: rgb.bin
 	VisualBoyAdvance -1 rgb.bin
 crt.o: crt.S
 	arm-linux-gnueabi-gcc -c crt.S
-	arm-linux-gnueabi-objdump -D crt.o
 rgb.o: rgb.c
 	arm-linux-gnueabi-gcc -Wall -c rgb.c -o rgb.o
 rgb.out: rgb.o crt.o cart.ls
