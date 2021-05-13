@@ -1,7 +1,5 @@
 package main
 
-// Draw a red square on the GameBoy Advance screen.
-
 import (
 	"image/color"
 	"machine"
