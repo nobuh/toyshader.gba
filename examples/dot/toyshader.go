@@ -24,9 +24,14 @@ var resolution = ivec2{ 240, 160 }
 var gl_FragColor = ivec4{ 0, 0, 0, 255 }
 var gl_FragCoord = ivec2{ 0, 0 }
 
+var isqrtCache = make(map[int16]int16)
 
 func isqrt(n int16) int16 {
-	x := int16(math.Sqrt(float64(n)))
+	x := isqrtCache[n]
+	if x == 0 {
+		x = int16(math.Sqrt(float64(n)))
+		isqrtCache[n] = x
+	}
 	return x
 }
 
