@@ -3,6 +3,7 @@ package main
 import (
 	"image/color"
 	"machine"
+	"math"
 )
 
 var display = machine.Display
@@ -19,42 +20,40 @@ type ivec4 struct {
 	a int16
 }
 
-const CMAX int16 = 255
 var resolution = ivec2{ 240, 160 }
 var gl_FragColor = ivec4{ 0, 0, 0, 255 }
 var gl_FragCoord = ivec2{ 0, 0 }
 
-func isqrt(n int16) int16 {
-	x := n
-	num_iterations := int16(5)
-	guess := int16(0)
 
-	for i := int16(0); i < num_iterations; i++ {
-		guess = (x + (n / x) ) / 2 * 100
-		if (guess - x) < 1 {
-			break
-		} else {
-			x = guess
-		}
-	}
-	return int16(guess)
+func isqrt(n int16) int16 {
+	x := int16(math.Sqrt(float64(n)))
+	return x
+}
+
+
+func distanceFromO(v ivec2) int16 {
+	return isqrt(v.x * v.x + v.y * v.y)
 }
 
 
 func length(a ivec2, b ivec2) int16 {
-	return isqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y))
+	return distanceFromO(ivec2{a.x - b.x, a.y - b.y})
 }
 
 
-func PseudoShader() {
+func pseudoShader() {
+	// R,G,B = 0..255, 0..255, 0..255
 
 	o := ivec2{ resolution.x / 2, resolution.y / 2 }
 
-	r := resolution.y / 10 // circle size is 1/20 of y axis
+	radius := resolution.y / 30
 	l := length(gl_FragCoord, o)
-	c := CMAX * r / l
+	if l < radius {
+		l = radius
+	}
+	c := 255 * radius / l
 
-	gl_FragColor = ivec4{c, c, c, CMAX}
+	gl_FragColor = ivec4{c, c, c, 255}
 
 }
 
@@ -67,11 +66,11 @@ func main() {
 
 			gl_FragCoord = ivec2{ x, y }
 
-			PseudoShader()
+			pseudoShader()
 
-			r := uint8(gl_FragColor.r * gl_FragColor.a / CMAX)
-			g := uint8(gl_FragColor.g * gl_FragColor.a / CMAX)
-			b := uint8(gl_FragColor.b * gl_FragColor.a / CMAX)
+			r := uint8(gl_FragColor.r * gl_FragColor.a / 255)
+			g := uint8(gl_FragColor.g * gl_FragColor.a / 255)
+			b := uint8(gl_FragColor.b * gl_FragColor.a / 255)
 
 			display.SetPixel(x, y, color.RGBA{ r, g, b, 0})  // alpha has no effect
 		}
