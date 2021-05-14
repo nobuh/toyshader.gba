@@ -24,31 +24,46 @@ var resolution = ivec2{ 240, 160 }
 var gl_FragColor = ivec4{ 0, 0, 0, 255 }
 var gl_FragCoord = ivec2{ 0, 0 }
 
-func length(a ivec2, b ivec2) int16 {
-	return (a.x - b.x) + (a.y - b.y)
+func isqrt(n int16) int16 {
+	x := n
+	num_iterations := int16(5)
+	guess := int16(0)
+
+	for i := int16(0); i < num_iterations; i++ {
+		guess = (x + (n / x) ) / 2 * 100
+		if (guess - x) < 1 {
+			break
+		} else {
+			x = guess
+		}
+	}
+	return int16(guess)
 }
 
-/* Your Code Here */
+
+func length(a ivec2, b ivec2) int16 {
+	return isqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y))
+}
+
 
 func PseudoShader() {
 
 	o := ivec2{ resolution.x / 2, resolution.y / 2 }
 
-	r := resolution.y / 20 // circle size is 1/20 of y axis
+	r := resolution.y / 10 // circle size is 1/20 of y axis
 	l := length(gl_FragCoord, o)
 	c := CMAX * r / l
 
 	gl_FragColor = ivec4{c, c, c, CMAX}
-}
 
-/* Until this */
+}
 
 
 func main() {
 	display.Configure()
 
-	for x:= int16(0); x < resolution.x; x++ {
-		for y := int16(0); y < resolution.y; y++ {
+	for y := int16(0); y < resolution.y; y++ {
+		for x:= int16(0); x < resolution.x; x++ {
 
 			gl_FragCoord = ivec2{ x, y }
 
