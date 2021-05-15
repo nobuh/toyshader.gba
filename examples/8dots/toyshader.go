@@ -3,9 +3,13 @@ package main
 import (
 	"image/color"
 	"machine"
+	"math"
 )
 
 var display = machine.Display
+
+const resolution_x = int16(240)
+const resolution_y = int16(160)
 
 type ivec2 struct {
 	x int16
@@ -19,10 +23,12 @@ type ivec4 struct {
 	a int16
 }
 
-var resolution = ivec2{ 240, 160 }
 var gl_FragColor = ivec4{ 0, 0, 0, 255 }
 var gl_FragCoord = ivec2{ 0, 0 }
 
+// integer radius 100 per 10 degree cache
+var isin100[36]int16
+var icos100[36]int16
 
 func distanceFromO(v ivec2) int16 {
 	return v.x * v.x + v.y * v.y
@@ -37,28 +43,39 @@ func length(a ivec2, b ivec2) int16 {
 func pseudoShader() {
 	// R,G,B = 0..255, 0..255, 0..255
 
-	o := ivec2{ resolution.x / 2, resolution.y / 2 }
+	const ncircle = int16(8)
+	const orbit_radius int16 = resolution_y / 3
+	const dot_radius = int16(30)
 
-	radius := int16(30)
-	l := length(gl_FragCoord, o)
+	o := ivec2{ resolution_x / 2, resolution_y / 2 }
 
-	c := int16(0)
-	if l < radius {
-		c = 255
-	} else {
-		c = 255 * radius / l
+	c := int16(0);
+	for i := int16(0); i < 360; i += 360 / ncircle {
+		x := int16(orbit_radius * isin100[int(i / 10)] / 100 + o.x)
+		y := int16(orbit_radius * icos100[int(i / 10)] / 100 + o.y)
+		l := length(gl_FragCoord, ivec2{ x, y })
+		c += 255 * dot_radius / l
 	}
 
+	if c > 255 {
+		c = 255
+	}
 	gl_FragColor = ivec4{c, c, c, 255}
 
 }
 
 
 func main() {
+	// init sin cos cache
+	for i := int16(0); i < 36; i++ {
+		isin100[i] = int16(100 * math.Sin(2.0 * 3.14 * float64(i) / 36))
+		icos100[i] = int16(100 * math.Cos(2.0 * 3.14 * float64(i) / 36))
+	}
+
 	display.Configure()
 
-	for y := int16(0); y < resolution.y; y++ {
-		for x:= int16(0); x < resolution.x; x++ {
+	for y := int16(0); y < resolution_y; y++ {
+		for x:= int16(0); x < resolution_x; x++ {
 
 			gl_FragCoord = ivec2{ x, y }
 

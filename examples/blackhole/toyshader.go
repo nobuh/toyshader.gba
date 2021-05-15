@@ -3,6 +3,7 @@ package main
 import (
 	"image/color"
 	"machine"
+	"math"
 )
 
 var display = machine.Display
@@ -23,14 +24,19 @@ var resolution = ivec2{ 240, 160 }
 var gl_FragColor = ivec4{ 0, 0, 0, 255 }
 var gl_FragCoord = ivec2{ 0, 0 }
 
+func isqrt(n int16) int16 {
+	return int16(math.Sqrt(float64(n)))
+}
+
 
 func distanceFromO(v ivec2) int16 {
-	return v.x * v.x + v.y * v.y
+	return isqrt(v.x * v.x + v.y * v.y)
 }
 
 
 func length(a ivec2, b ivec2) int16 {
-	return distanceFromO(ivec2{a.x - b.x, a.y - b.y})
+	// return distanceFromO(ivec2{a.x - b.x, a.y - b.y})
+	return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)
 }
 
 
@@ -39,15 +45,9 @@ func pseudoShader() {
 
 	o := ivec2{ resolution.x / 2, resolution.y / 2 }
 
-	radius := int16(30)
-	l := length(gl_FragCoord, o)
-
-	c := int16(0)
-	if l < radius {
-		c = 255
-	} else {
-		c = 255 * radius / l
-	}
+	radius := int16(10)
+	l := length(gl_FragCoord, o) / resolution.y
+	c := 255 * radius / l
 
 	gl_FragColor = ivec4{c, c, c, 255}
 
