@@ -27,8 +27,8 @@ var gl_FragColor = ivec4{ 0, 0, 0, 255 }
 var gl_FragCoord = ivec2{ 0, 0 }
 
 // integer radius 100 per 10 degree cache
-var isin100[36]int16
-var icos100[36]int16
+var sin100[36]int16
+var cos100[36]int16
 
 func distanceFromO(v ivec2) int16 {
 	return v.x * v.x + v.y * v.y
@@ -44,15 +44,15 @@ func pseudoShader() {
 	// R,G,B = 0..255, 0..255, 0..255
 
 	const ncircle = int16(8)
-	const orbit_radius int16 = resolution_y / 3
+	const orbit_radius  = resolution_y / 3
 	const dot_radius = int16(30)
 
 	o := ivec2{ resolution_x / 2, resolution_y / 2 }
 
 	c := int16(0);
 	for i := int16(0); i < 360; i += 360 / ncircle {
-		x := int16(orbit_radius * isin100[int(i / 10)] / 100 + o.x)
-		y := int16(orbit_radius * icos100[int(i / 10)] / 100 + o.y)
+		x := orbit_radius * sin100[i / 10] / 100 + o.x
+		y := orbit_radius * cos100[i / 10] / 100 + o.y
 		l := length(gl_FragCoord, ivec2{ x, y })
 		c += 255 * dot_radius / l
 	}
@@ -68,8 +68,8 @@ func pseudoShader() {
 func main() {
 	// init sin cos cache
 	for i := int16(0); i < 36; i++ {
-		isin100[i] = int16(100 * math.Sin(2.0 * 3.14 * float64(i) / 36))
-		icos100[i] = int16(100 * math.Cos(2.0 * 3.14 * float64(i) / 36))
+		sin100[i] = int16(100 * math.Sin(2.0 * 3.14 * float64(i) / 36))
+		cos100[i] = int16(100 * math.Cos(2.0 * 3.14 * float64(i) / 36))
 	}
 
 	display.Configure()
