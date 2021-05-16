@@ -9,6 +9,7 @@ Toy Shader in TinyGo for Game Boy Advance.
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/blackhole.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/dot.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/8dots.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/rand.png)
 
 ### Build Environemnt
 
@@ -49,6 +50,9 @@ from examples/gray/pseudoShader.go
 // sin100 : sin(degree) with radius = 100
 // cos100 : cos(degree) with radius = 100
 // ilength(ivec2, ivec2) : euclidean distance ^2
+// dot(ivec2, ivec2) 
+// fract(int16) : act as mod 100
+// rand100 : rand 0..100
 
 func pseudoShader() {
 	gray := int16(255/2)
