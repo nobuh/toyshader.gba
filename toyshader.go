@@ -63,14 +63,6 @@ func fract(n int16) int16 {
 }
 
 
-func rand100() int16 {
-	a := fract(dot(gl_FragCoord, ivec2{ 206, 1245 })) - resolution_y /2
-	s := a * (618 + a * a * (-3802 + a * a * 5339))
-	t := fract(s * 4735)
-	return t
-}
-
-
 func main() {
 	// init sin cos cache
 	for i := int16(0); i < 36; i++ {

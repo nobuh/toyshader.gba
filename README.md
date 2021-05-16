@@ -52,7 +52,6 @@ from examples/gray/pseudoShader.go
 // ilength(ivec2, ivec2) : euclidean distance ^2
 // dot(ivec2, ivec2) 
 // fract(int16) : act as mod 100
-// rand100 : rand 0..100
 
 func pseudoShader() {
 	gray := int16(255/2)
