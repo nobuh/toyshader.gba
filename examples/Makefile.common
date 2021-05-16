@@ -1,0 +1,9 @@
+toyshader: toyshader.bin
+	VisualBoyAdvance -1 toyshader.bin
+toyshader.bin: toyshader.go 
+	tinygo build -target gameboy-advance -o toyshader.bin toyshader.go
+toyshader.go: pseudoShader.go
+	cp -f ../../toyshader.go .
+	cat pseudoShader.go >> toyshader.go
+clean:
+	rm *.bin toyshader.go 
