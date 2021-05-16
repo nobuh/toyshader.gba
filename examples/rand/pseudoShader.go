@@ -24,6 +24,6 @@ func rand100() int16 {
 }
 
 func pseudoShader() {
-	c := int16(rand100() * 255 / 100)
+	c := rand100() * 255 / 100
 	gl_FragColor = ivec4{c, c, c, 255}
 }

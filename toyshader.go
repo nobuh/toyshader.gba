@@ -72,20 +72,22 @@ func main() {
 
 	display.Configure()
 
-	for y := int16(0); y < resolution_y; y++ {
-		for x:= int16(0); x < resolution_x; x++ {
+	for {
+		for y := int16(0); y < resolution_y; y++ {
+			for x:= int16(0); x < resolution_x; x++ {
 
-			gl_FragCoord = ivec2{ x, y }
+				gl_FragCoord = ivec2{ x, y }
 
-			pseudoShader()
+				pseudoShader()
 
-			r := uint8(gl_FragColor.r * gl_FragColor.a / 255)
-			g := uint8(gl_FragColor.g * gl_FragColor.a / 255)
-			b := uint8(gl_FragColor.b * gl_FragColor.a / 255)
+				r := uint8(gl_FragColor.r * gl_FragColor.a / 255)
+				g := uint8(gl_FragColor.g * gl_FragColor.a / 255)
+				b := uint8(gl_FragColor.b * gl_FragColor.a / 255)
 
-			display.SetPixel(x, y, color.RGBA{ r, g, b, 0})  // alpha has no effect
+				display.SetPixel(x, y, color.RGBA{ r, g, b, 0})  // alpha has no effect
+			}
 		}
-	}
 
-	display.Display()
+		display.Display()
+	}
 }
