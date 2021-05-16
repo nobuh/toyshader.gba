@@ -32,11 +32,13 @@ var cos100Cache[36]int16
 
 
 func sin100(degree int16) int16 {
+	degree = degree - degree / 360
 	return sin100Cache[degree / 10]
 }
 
 
 func cos100(degree int16) int16 {
+	degree = degree - degree / 360
 	return cos100Cache[degree / 10]
 }
 
