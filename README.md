@@ -2,6 +2,14 @@
 
 Toy Shader in TinyGo for Game Boy Advance.
 
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/gray.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/slope.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/rings.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/diamond.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/blackhole.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/dot.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/8dots.png)
+
 ### Build Environemnt
 
 - Ubuntu 20.04 currenly used, but any platform runs TinyGo possible.
