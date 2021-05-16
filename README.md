@@ -18,7 +18,7 @@ Toy Shader in TinyGo for Game Boy Advance.
 ### How to run this demo on real hardware
 
 I'm currently using Visual Boy Advance. Because it can load and run ROM cart memory (0x08000000) without Nintendo's ROM headers.
-It seems tha Visual Boy Advance can emulate the 3rd party Flash Cart Drive which has no Nintendo headers, so we don'nt need create ROM headers.  
+It seems that the Visual Boy Advance can emulate the 3rd party Flash Cart Drive which has no Nintendo headers, so we don'nt need create ROM headers.  
 
 If you want to run this demo on real hardware or mGBA, pleae check devkitPro or similer tools.
 
