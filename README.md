@@ -51,14 +51,14 @@ from examples/gray/pseudoShader.go
 //
 // sin(degree) sin with radius = 100
 // cos(degree) sin with radius = 100
-// length(ivec2, ivec2) : euclidean distance ^2
-// dot(ivec2, ivec2) 
-// fract(int16) : act as mod 100
+// length(vec2, vec2) : euclidean distance ^2
+// dot(vec2, vec2) 
+// fract(int16) :  like mod 100
 
 func pseudoShader() {
 	gray := int16(255/2)
 	half_transparent := int16(255/2)
-	gl_FragColor = ivec4{gray, gray, gray, half_transparent}
+	gl_FragColor = vec4{gray, gray, gray, half_transparent}
 }
 ```
 
