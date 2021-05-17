@@ -44,14 +44,14 @@ from examples/gray/pseudoShader.go
 // resolution_y = 160
 //
 // all variable type should be int16
-// ivec2 has x,y 
-// ivec4 has R,G,B,A
+// vec2 has { x,y }
+// vec4 has { r,g,b,a }
 //
 // R,G,B,A = 0..255, 0..255, 0..255, 0..255
 //
-// sin100 : sin(degree) with radius = 100
-// cos100 : cos(degree) with radius = 100
-// ilength(ivec2, ivec2) : euclidean distance ^2
+// sin(degree) sin with radius = 100
+// cos(degree) sin with radius = 100
+// length(ivec2, ivec2) : euclidean distance ^2
 // dot(ivec2, ivec2) 
 // fract(int16) : act as mod 100
 
