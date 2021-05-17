@@ -11,6 +11,7 @@ Toy Shader in TinyGo for Game Boy Advance.
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/8dots.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/rand.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/gradient.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/blinkinggradient.png)
 
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/blinking.gif)
 
