@@ -31,22 +31,19 @@ Toy Shader in TinyGo for Game Boy Advance.
 
 ### Shader Values and Functions
 
-```
-resolution_x = 240
-resolution_y = 160
-
-all variable type should be int16
-vec2 has { x,y }
-vec4 has { r,g,b,a }
-
+most variables in int16
 R,G,B,A = 0..255, 0..255, 0..255, 0..255
 
-sin(degree) sin with radius = 100
-cos(degree) sin with radius = 100
-length(vec2, vec2) : euclidean distance ^2
-dot(vec2, vec2) 
-fract(int16) :  like mod 100
-```
+- resolution_x = 240
+- resolution_y = 160
+- vec2 has { x,y } 
+- vec4 has { r,g,b,a }
+- sin() / cos() : radius = 100 and degree by 10
+- length(vec2, vec2) : euclidean distance ^2
+- dot(vec2, vec2) 
+- fract(int16) : att like mod 100
+- shader.TurnPageByKey() : need to be called before Run() and you can turn screen by any key
+- shader.Run() : main loop
 
 ### Build your shader
 
@@ -55,6 +52,7 @@ fract(int16) :  like mod 100
 - git clone https://github.com/nobuh/toyshader.gba.git
 - cd toyshader.gba
 - write your shader in function shader() on the shader/code.go
+- if you want to use TurnPageByKey() mode, put it on main.go before Run()
 - make
 
 ### How to run this demo on real hardware
@@ -63,3 +61,9 @@ I'm currently using Visual Boy Advance. Because it can load and run ROM cart mem
 It seems that the Visual Boy Advance can emulate the 3rd party Flash Cart Drive which has no Nintendo headers, so we don'nt need create ROM headers.  
 
 If you want to run this demo on real hardware or mGBA, pleae check devkitPro or similer tools.
+
+### Acknowledgements
+
+- [VisualBoyAdvance](https://board.vba-m.com/) I 'd like to use raw binary as ROM, without fake Nintendo's logo.
+- [TinyGo](https://tinygo.org/) for easy and stable ARM cross compile.
+- [META Gameboy Advance Blog](https://remyhax.xyz/posts/gba-blog/) for how to handle Keys.
