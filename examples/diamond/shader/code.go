@@ -1,3 +1,5 @@
+package shader
+
 func difflength(a vec2, b vec2) int16 {
 	var x, y int16
 
@@ -17,7 +19,7 @@ func difflength(a vec2, b vec2) int16 {
 }
 
 
-func pseudoShader() {
+func shader() {
 
 	o := vec2{ resolution_x / 2, resolution_y / 2 }
 

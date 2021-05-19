@@ -1,3 +1,5 @@
+package shader
+
 func sqrt(n int16) int16 {
 	x := n
 	num_iterations := int16(5)
@@ -20,7 +22,7 @@ func dlength(a vec2, b vec2) int16 {
 }
 
 
-func pseudoShader() {
+func shader() {
 
 	o := vec2{ resolution_x / 2, resolution_y / 2 }
 

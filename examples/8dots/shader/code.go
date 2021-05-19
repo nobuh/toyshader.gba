@@ -1,4 +1,6 @@
-func pseudoShader() {
+package shader
+
+func shader() {
 
 	const ncircle = int16(8)
 	const orbit_radius  = resolution_y / 3

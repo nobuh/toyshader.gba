@@ -1,1 +1,1 @@
-../Makefile.common
+../../Makefile

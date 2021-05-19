@@ -1,4 +1,4 @@
-package main
+package shader
 
 import (
 	"image/color"
@@ -73,7 +73,7 @@ func abs(n int16) int16 {
 
 
 
-func main() {
+func Run() {
 	// init sin cos cache
 	for i := int16(0); i < 36; i++ {
 		sinCache[i] = int16(100 * math.Sin(2.0 * 3.14 * float64(i) / 36))
@@ -92,7 +92,7 @@ func main() {
 
 				gl_FragCoord = vec2{ x, y }
 
-				pseudoShader()
+				shader()
 
 				r := uint8(gl_FragColor.r * gl_FragColor.a / 255)
 				g := uint8(gl_FragColor.g * gl_FragColor.a / 255)
@@ -104,8 +104,4 @@ func main() {
 
 		display.Display()
 	}
-}
-func pseudoShader() {
-	c := abs(sin(u_time * 10)) * 255/100
-	gl_FragColor = vec4{c, 0, c, 255}
 }

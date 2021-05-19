@@ -1,4 +1,6 @@
-func pseudoShader() {
+package shader
+
+func shader() {
 
 	o := vec2{ resolution_x / 2, resolution_y / 2 }
 

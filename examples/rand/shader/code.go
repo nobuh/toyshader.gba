@@ -1,3 +1,5 @@
+package shader
+
 func rand() int16 {
         // based on https://gist.github.com/johansten/3633917
         a := fract(dot(gl_FragCoord, vec2{ 206, 1245 })) - resolution_y /2
@@ -6,7 +8,7 @@ func rand() int16 {
         return t
 }
 
-func pseudoShader() {
+func shader() {
 	c := rand() * 255 / 100
 	gl_FragColor = vec4{c, c, c, 255}
 }
