@@ -23,6 +23,8 @@ Toy Shader in TinyGo for Game Boy Advance.
 
 ### How to Build examples.
 
+- export GO111MODULE="off"
+- cd $GOPATH/src
 - git clone https://github.com/nobuh/toyshader.gba.git
 - cd toyshader.gba/examples/[any demo you want to build]/
 - make
