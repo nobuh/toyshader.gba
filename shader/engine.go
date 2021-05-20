@@ -31,6 +31,7 @@ type vec4 struct {
 
 var gl_FragColor = vec4{ 0, 0, 0, 255 }
 var gl_FragCoord = vec2{ 0, 0 }
+var u_mouse = vec2{ resolution_x / 2, resolution_y / 2 }
 
 var sinCache[36]int16 // radius = 100
 var cosCache[36]int16 // degree by 10, 0..350
@@ -113,16 +114,9 @@ func Run() {
 	display.Configure()
 	regDISPSTAT.SetBits(1<<3 | 1<<4)
 
-	if KeyEnabled > 0 {
-		// from https://remyhax.xyz/posts/gba-blog/
-		interrupt.New(machine.IRQ_VBLANK, update).Enable()
-		for { } // prevent exit
-	} else {
-		for {
-			update_time()
-			draw()
-		}
-	}
+	// from https://remyhax.xyz/posts/gba-blog/
+	interrupt.New(machine.IRQ_VBLANK, update).Enable()
+	for { } // prevent exit
 }
 
 func update_time() {
@@ -134,15 +128,19 @@ func update_time() {
 func update(interrupt.Interrupt) {
 	switch keyValue := regKEYPAD.Get(); keyValue {
 	case keyDOWN:
+		u_mouse.y += 8
 		update_time()
 		draw()
 	case keyUP:
+		u_mouse.y -= 8
 		update_time()
 		draw()
 	case keyLEFT:
+		u_mouse.x -= 8
 		update_time()
 		draw()
 	case keyRIGHT:
+		u_mouse.x += 8
 		update_time()
 		draw()
 	case keyA:
@@ -151,6 +149,11 @@ func update(interrupt.Interrupt) {
 	case keyB:
 		update_time()
 		draw()
+	default:
+		if KeyEnabled == 0 {
+			update_time()
+			draw()
+		}
 	}
 }
 
