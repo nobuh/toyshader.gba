@@ -21,10 +21,11 @@ func difflength(a vec2, b vec2) int16 {
 
 func shader() {
 
-	o := vec2{ resolution_x / 2, resolution_y / 2 }
+	//o := vec2{ resolution_x / 2, resolution_y / 2 }
+	var p vec2 = u_mouse
 
 	radius := resolution_y / 20
-	l := difflength(gl_FragCoord, o)
+	l := difflength(gl_FragCoord, p)
 	if l < radius {
 		l = radius
 	}
