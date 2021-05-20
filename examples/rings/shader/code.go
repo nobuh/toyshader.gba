@@ -26,7 +26,8 @@ func shader() {
 
 	o := vec2{ resolution_x / 2, resolution_y / 2 }
 
-	r := resolution_y / 10
+	//r := resolution_y / 10
+	r := u_mouse.y / 5
 	l := dlength(gl_FragCoord, o)
 	c := 255 * r / l
 
