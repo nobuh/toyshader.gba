@@ -2,17 +2,17 @@
 
 Toy Shader in TinyGo for Game Boy Advance.
 
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/gray/gray.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/slope/slope.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/rings/rings.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/diamond/diamond.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/blackhole/blackhole.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/dot/dot.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/8dots/8dots.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/rand/rand.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/blinking/blinking.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/gradient/gradient.png)
-![](https://github.com/nobuh/toyshader.gba/blob/master/examples/blinkinggradient/blinkinggradient.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/gray/gray.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/slope/slope.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/rings/rings.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/diamond/diamond.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/blackhole/blackhole.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/dot/dot.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/8dots/8dots.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/rand/rand.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/blinking/blinking.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/gradient/gradient.png)
+![](https://github.com/nobuh/toyshader.gba/blob/3x2pixelblocks/examples/blinkinggradient/blinkinggradient.png)
 
 ### Build Environemnt
 
@@ -31,13 +31,14 @@ Toy Shader in TinyGo for Game Boy Advance.
 
 ### Shader Values and Functions
 
-most variables in int16
-R,G,B = 0..255, 0..255, 0..255
+all variable type is int16
 
-- screen_x = 240
-- screen_y = 160
+R,G,B = { 0..255, 0..255, 0..255 }
+
+- u_resolution = { 240, 160 }
+- u_time = 0..35
+- u_mouse = { 0..240, 0..160 }
 - cdepth = 255 // color depth
-- norm = 80 // normalized coefficient
 - vec2 has { x,y } 
 - vec3 has { r,g,b }
 - sin() / cos() : radius = 80 and degree by 10
