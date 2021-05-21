@@ -24,13 +24,13 @@ func shader() {
 	//o := vec2{ resolution_x / 2, resolution_y / 2 }
 	var p vec2 = u_mouse
 
-	radius := resolution_y / 20
+	radius := u_resolution.y / 20
 	l := difflength(gl_FragCoord, p)
 	if l < radius {
 		l = radius
 	}
-	c := 255 * radius / l
+	c := cdepth * radius / l
 
-	gl_FragColor = vec4{c, c, c, 255}
+	gl_FragColor = vec3{c, c, c}
 
 }

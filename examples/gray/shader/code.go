@@ -1,7 +1,6 @@
 package shader
 
 func shader() {
-	gray := int16(255/2)
-	half_transparent := int16(255/2)
-	gl_FragColor = vec4{gray, gray, gray, half_transparent}
+	gray := cdepth / 4
+	gl_FragColor = vec3{gray, gray, gray}
 }
