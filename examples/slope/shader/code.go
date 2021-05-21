@@ -5,11 +5,11 @@ func slength(a vec2, b vec2) int16 {
 }
 
 func shader() {
-	o := vec2{ resolution_x / 2, resolution_y / 2 }
+	o := vec2{ u_resolution.x / 2, u_resolution.y / 2 }
 
-	r := resolution_y / 20
+	r := u_resolution.y / 20
 	l := slength(gl_FragCoord, o)
-	c := 255 * r / l
+	c := cdepth * r / l
 
-	gl_FragColor = vec4{c, c, c, 255}
+	gl_FragColor = vec3{c, c, c}
 }

@@ -32,16 +32,18 @@ Toy Shader in TinyGo for Game Boy Advance.
 ### Shader Values and Functions
 
 most variables in int16
-R,G,B,A = 0..255, 0..255, 0..255, 0..255
+R,G,B = 0..255, 0..255, 0..255
 
-- resolution_x = 240
-- resolution_y = 160
+- screen_x = 240
+- screen_y = 160
+- cdepth = 255 // color depth
+- norm = 80 // normalized coefficient
 - vec2 has { x,y } 
-- vec4 has { r,g,b,a }
-- sin() / cos() : radius = 100 and degree by 10
+- vec3 has { r,g,b }
+- sin() / cos() : radius = 80 and degree by 10
 - length(vec2, vec2) : euclidean distance ^2
 - dot(vec2, vec2) 
-- fract(int16) : att like mod 100
+- fract(int16) : att like mod 80
 - shader.TurnPageByKey() : need to be called before Run() and you can turn screen by any key
 - shader.Run() : main loop
 

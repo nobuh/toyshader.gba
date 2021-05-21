@@ -14,28 +14,28 @@ import (
 
 var display = machine.Display
 
-const resolution_x = int16(240)
-const resolution_y = int16(160)
-
 type vec2 struct {
 	x int16
 	y int16
 }
 
-type vec4 struct {
+type vec3 struct {
 	r int16
 	g int16
 	b int16
-	a int16
 }
 
-var gl_FragColor = vec4{ 0, 0, 0, 255 }
-var gl_FragCoord = vec2{ 0, 0 }
-var u_mouse = vec2{ resolution_x / 2, resolution_y / 2 }
+const cdepth   = int16(255) // color depth
 
-var sinCache[36]int16 // radius = 100
+var gl_FragColor = vec3{ 0, 0, 0 } // shoud be 0..cdepth
+var gl_FragCoord = vec2{ 0, 0 }	// shoud be 0..norm 
+
+var sinCache[36]int16 // radius = norm 
 var cosCache[36]int16 // degree by 10, 0..350
+
 var u_time = int16(0) // pseudo time value 0..35
+var u_resolution = vec2{ 240, 160 }
+var u_mouse = vec2{ u_resolution.x / 2, u_resolution.y / 2 }
 
 var KeyEnabled uint8 = 0 // Key is default disabled
 
@@ -94,7 +94,7 @@ func dot(a vec2, b vec2) int16 {
 
 
 func fract(n int16) int16 {
-	return n - n / 100
+	return n - n / 80
 }
 
 
@@ -107,8 +107,8 @@ func abs(n int16) int16 {
 func Run() {
 	// init sin cos cache
 	for i := int16(0); i < 36; i++ {
-		sinCache[i] = int16(100 * math.Sin(2.0 * 3.14 * float64(i) / 36))
-		cosCache[i] = int16(100 * math.Cos(2.0 * 3.14 * float64(i) / 36))
+		sinCache[i] = int16(100.0 * math.Sin(2.0 * 3.14 * float64(i) / 36))
+		cosCache[i] = int16(100.0 * math.Cos(2.0 * 3.14 * float64(i) / 36))
 	}
 
 	display.Configure()
@@ -116,6 +116,7 @@ func Run() {
 
 	// from https://remyhax.xyz/posts/gba-blog/
 	interrupt.New(machine.IRQ_VBLANK, update).Enable()
+	draw()	// first piciture
 	for { } // prevent exit
 }
 
@@ -128,19 +129,19 @@ func update_time() {
 func update(interrupt.Interrupt) {
 	switch keyValue := regKEYPAD.Get(); keyValue {
 	case keyDOWN:
-		u_mouse.y += 8
+		u_mouse.y += u_resolution.y * 10
 		update_time()
 		draw()
 	case keyUP:
-		u_mouse.y -= 8
+		u_mouse.y -= u_resolution.y * 10
 		update_time()
 		draw()
 	case keyLEFT:
-		u_mouse.x -= 8
+		u_mouse.x -= u_resolution.x * 10
 		update_time()
 		draw()
 	case keyRIGHT:
-		u_mouse.x += 8
+		u_mouse.x += u_resolution.x * 10
 		update_time()
 		draw()
 	case keyA:
@@ -160,20 +161,23 @@ func update(interrupt.Interrupt) {
 
 func draw() {
 
-	for y := int16(0); y < resolution_y; y++ {
-		for x:= int16(0); x < resolution_x; x++ {
+	for y := int16(0); y < u_resolution.y; y += 2 {
+		for x:= int16(0); x < u_resolution.x; x += 3 {
 
 			gl_FragCoord = vec2{ x, y }
 
 			shader() // defined in user code
 
-                        // gl_FragColor * gl_FragColor can be over int16
-                        // so split /255 to /5 and /51
-                        r := uint8(gl_FragColor.r * (gl_FragColor.a / 5) / 51)
-                        g := uint8(gl_FragColor.g * (gl_FragColor.a / 5) / 51)
-                        b := uint8(gl_FragColor.b * (gl_FragColor.a / 5) / 51)
+                        r := uint8(gl_FragColor.r)
+                        g := uint8(gl_FragColor.g)
+                        b := uint8(gl_FragColor.b)
 
-                        display.SetPixel(x, y, color.RGBA{ r, g, b, 0})  // alpha has no effect
+                        display.SetPixel(x, y, color.RGBA{ r, g, b, 0})   // alpha has no effect
+                        display.SetPixel(x+1, y, color.RGBA{ r, g, b, 0})
+                        display.SetPixel(x+2, y, color.RGBA{ r, g, b, 0})
+                        display.SetPixel(x, y+1, color.RGBA{ r, g, b, 0})
+                        display.SetPixel(x+1, y+1, color.RGBA{ r, g, b, 0})
+                        display.SetPixel(x+2, y+1, color.RGBA{ r, g, b, 0})
                 }
 	}
 }
