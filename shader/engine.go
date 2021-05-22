@@ -107,8 +107,8 @@ func abs(n int16) int16 {
 func Run() {
 	// init sin cos cache
 	for i := int16(0); i < 36; i++ {
-		sinCache[i] = int16(100.0 * math.Sin(2.0 * 3.14 * float64(i) / 36))
-		cosCache[i] = int16(100.0 * math.Cos(2.0 * 3.14 * float64(i) / 36))
+		sinCache[i] = int16(80.0 * math.Sin(2.0 * 3.14 * float64(i) / 36))
+		cosCache[i] = int16(80.0 * math.Cos(2.0 * 3.14 * float64(i) / 36))
 	}
 
 	display.Configure()
