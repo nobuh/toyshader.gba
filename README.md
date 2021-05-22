@@ -14,6 +14,12 @@ Toy Shader in TinyGo for Game Boy Advance.
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/gradient/gradient.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/blinkinggradient/blinkinggradient.png)
 
+### Releases
+
+- v0.2: 80x80 screen with 3x2 pixel block version for drawing speed.
+- v0.1: 240x160 pixel screen version.
+
+
 ### Build Environemnt
 
 - Ubuntu 20.04 currenly used, but any platform runs TinyGo possible.
