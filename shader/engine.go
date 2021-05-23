@@ -26,6 +26,7 @@ type vec3 struct {
 }
 
 const cdepth   = int16(255) // color depth
+const normalize = int16(80)
 
 var gl_FragColor = vec3{ 0, 0, 0 } // shoud be 0..cdepth
 var gl_FragCoord = vec2{ 0, 0 }	// shoud be 0..norm 
@@ -58,6 +59,26 @@ var (
 )
 
 // ========== Shader Functions ==========
+
+func smoothstep(start int16, end int16, x int16) int16 {
+	return min(max(normalize * (x - start) / (end - start), 0), normalize)
+}
+
+func min(a int16, b int16) int16 {
+	if a < b {
+		return a
+	} else {
+		return b
+	}
+}
+
+func max(a int16, b int16) int16 {
+	if a > b {
+		return a
+	} else {
+		return b
+	}
+}
 
 func TurnPageByKey() {
 	KeyEnabled = uint8(1)
