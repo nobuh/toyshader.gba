@@ -1,7 +1,9 @@
 package shader
 
 func shader() {
-	y := smoothstep(10, 0, abs(gl_FragCoord.y - gl_FragCoord.x))
+	st := vec2{ normalize * gl_FragCoord.x / u_resolution.x, normalize * gl_FragCoord.y / u_resolution.y }
+
+	y := smoothstep(5, 0, abs(st.y - st.x))
 
 	color := vec3{ 0, cdepth * y / normalize, 0 }
 
