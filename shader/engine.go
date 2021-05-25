@@ -60,9 +60,20 @@ var (
 
 // ========== Shader Functions ==========
 
+func adjustedRGB(v vec3) vec3 {
+    return vec3{ cdepth * v.r / normalize, cdepth * v.g / normalize, cdepth * v.b / normalize }
+}
+
+
+func normalizedXY(v vec2) vec2 {
+    return vec2{ normalize * v.x / u_resolution.x, normalize * v.y / u_resolution.y }
+}
+
+
 func smoothstep(start int16, end int16, x int16) int16 {
 	return min(max(normalize * (x - start) / (end - start), 0), normalize)
 }
+
 
 func min(a int16, b int16) int16 {
 	if a < b {

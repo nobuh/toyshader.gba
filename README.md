@@ -15,6 +15,7 @@ Toy Shader in TinyGo for Game Boy Advance.
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/blinkinggradient/blinkinggradient.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/singleline/singleline.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/line/line.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/lineongradient/lineongradient.png)
 
 ### Releases
 
@@ -42,7 +43,7 @@ Toy Shader in TinyGo for Game Boy Advance.
 all variable type is int16
 
 R,G,B = { 0..255, 0..255, 0..255 }
-
+* * * * 
 - u_resolution = { 240, 160 }
 - u_time = 0..35
 - u_mouse = { 0..240, 0..160 }
@@ -53,6 +54,9 @@ R,G,B = { 0..255, 0..255, 0..255 }
 - length(vec2, vec2) : euclidean distance ^2
 - dot(vec2, vec2) 
 - fract(int16) : att like mod 80
+- normalizedXY(vec2) : convert native screen x,y position to normalized (0..80) value.
+- adjustedRGB(vec3) : convert normalized RGB (0..80) value to adjusted RGB (0..255) value.
+* * * * 
 - shader.TurnPageByKey() : need to be called before Run() and you can turn screen by any key
 - shader.Run() : main loop
 
