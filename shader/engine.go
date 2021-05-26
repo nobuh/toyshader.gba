@@ -60,6 +60,15 @@ var (
 
 // ========== Shader Functions ==========
 
+
+func pow(x int16, n int16) int16 {
+        for i := int16(0); i < n; i++ {
+                x = x * x / normalize
+        }
+        return x
+}
+
+
 func adjustedRGB(v vec3) vec3 {
     return vec3{ cdepth * v.r / normalize, cdepth * v.g / normalize, cdepth * v.b / normalize }
 }
