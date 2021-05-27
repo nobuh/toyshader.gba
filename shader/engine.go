@@ -60,6 +60,14 @@ var (
 
 // ========== Shader Functions ==========
 
+func step(thresh int16, x int16) int16 {
+	if x > thresh {
+		return normalize
+	} else {
+		return 0
+	}
+}
+
 
 func pow(x int16, n int16) int16 {
         for i := int16(0); i < n; i++ {

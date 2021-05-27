@@ -18,6 +18,7 @@ Toy Shader in TinyGo for Game Boy Advance.
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/lineongradient/lineongradient.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/wave/wave.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/curvedline/curvedline.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/stepline/stepline.png)
 
 ### Releases
 
