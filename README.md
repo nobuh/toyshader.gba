@@ -20,6 +20,7 @@ Toy Shader in TinyGo for Game Boy Advance.
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/curvedline/curvedline.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/stepline/stepline.png)
 ![](https://github.com/nobuh/toyshader.gba/blob/master/examples/smoothstep/smoothstep.png)
+![](https://github.com/nobuh/toyshader.gba/blob/master/examples/mix/mix.png)
 
 ### Releases
 
@@ -59,6 +60,7 @@ R,G,B = { 0..255, 0..255, 0..255 }
 - dot(vec2, vec2) 
 - fract(int16) : att like mod 80
 - pow(x int16, n int16) : x * (x/80)^(n-1)
+- mix(x vec3, y vec3, ratio int16) : mix x and y with ratio
 - normalizedXY(vec2) : convert native screen x,y position to normalized (0..80) value.
 - adjustedRGB(vec3) : convert normalized RGB (0..80) value to adjusted RGB (0..255) value.
 - shader.TurnPageByKey() : need to be called before Run() and you can turn screen by any key

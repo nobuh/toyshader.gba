@@ -60,6 +60,16 @@ var (
 
 // ========== Shader Functions ==========
 
+func mix(x vec3, y vec3, ratio int16) vec3 {
+	var v vec3
+
+	v.r = x.r * ratio / normalize + y.r * (normalize - ratio) / normalize
+	v.g = x.g * ratio / normalize + y.g * (normalize - ratio) / normalize
+	v.b = x.b * ratio / normalize + y.b * (normalize - ratio) / normalize
+	return v
+}
+
+
 func step(thresh int16, x int16) int16 {
 	if x > thresh {
 		return normalize
