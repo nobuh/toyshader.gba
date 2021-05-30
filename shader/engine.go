@@ -93,7 +93,7 @@ func adjustedRGB(v vec3) vec3 {
 
 
 func normalizedXY(v vec2) vec2 {
-    return vec2{ normalize * v.x / u_resolution.x, normalize * v.y / u_resolution.y }
+    return vec2{ normalize * v.x / u_resolution.x, normalize - normalize * v.y / u_resolution.y }
 }
 
 
