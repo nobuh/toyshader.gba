@@ -84,6 +84,16 @@ It seems that the Visual Boy Advance can emulate the 3rd party Flash Cart Drive 
 
 If you want to run this demo on real hardware or mGBA, pleae check devkitPro or similer tools.
 
+### Run as a demo on Windolws
+
+- Download visualboyadvance-m and extract
+- mkdir and put visualboyadvance-m and toyshader.bin
+- create a start.bat file contains 
+
+      start /max visulaboyadvance-m toyshader.bin
+
+- click start.bat to start and CTL-Q to quit
+
 ### Acknowledgements
 
 - [VisualBoyAdvance](https://board.vba-m.com/) I 'd like to use raw binary as ROM, without fake Nintendo's logo.
