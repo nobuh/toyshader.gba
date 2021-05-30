@@ -14,9 +14,16 @@ func shader() {
 
 	// left * bottom is similar to logical and 
 	// also * top * right
-	color := vec3{ left * bottom /n * top /n * right /n * center /n * center2 /n,
-		       left * bottom /n * top /n * right /n * center /n * center2 /n,
-		       left * bottom /n * top /n * right /n * center /n * center2 /n }
+	sum := left * bottom /n * top /n * right /n * center /n * center2 /n
+
+	var color vec3
+	if p.x < 42 && p.y > 42 {
+		color = vec3{ 0, 0, sum }
+	} else if p.x > 42 && p.y < 42 {
+		color = vec3{ sum, 0, 0 }
+	} else {
+		color = vec3{ sum, sum, sum }
+	}
 
 	gl_FragColor = adjustedRGB(color)
 }
