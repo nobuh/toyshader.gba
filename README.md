@@ -28,13 +28,12 @@ Toy Shader in TinyGo for Game Boy Advance.
 - v0.2: 80x80 screen with 3x2 pixel block version for drawing speed.
 - v0.1: 240x160 pixel screen version.
 
-
 ### Build Environemnt
 
 - Ubuntu 20.04 currenly used, but any platform runs TinyGo possible.
-- Tiny Go version 0.18.0 linux/amd64 (using go version go1.16.4 and LLVM version 11.0.0)
+- tinygo version 0.21.0 linux/amd64 (using go version go1.17.5 and LLVM version 11.0.0)
 - make
-- VisualBoyAdvance version 1.8.0
+- mgba-sdl 0.7.0
 
 ### Build examples.
 
@@ -79,23 +78,36 @@ R,G,B = { 0..255, 0..255, 0..255 }
 
 ### How to run this demo on real hardware
 
-I'm currently using Visual Boy Advance. Because it can load and run ROM cart memory (0x08000000) without Nintendo's ROM headers.
-It seems that the Visual Boy Advance can emulate the 3rd party Flash Cart Drive which has no Nintendo headers, so we don'nt need create ROM headers.  
+#### as a ROM
 
-If you want to run this demo on real hardware or mGBA, pleae check devkitPro or similer tools.
+tinygo's GBA target builds a binary as a rom image, so You can run it on any GBA emulator.
+However, if you build the binary with default optimization level or '-opt z' optimization level, 
+it behaves incorrectly or just hang. Please use opt s or lower optimiazation level.
 
-### Run as a demo on Windolws
+And if you have Flash Cartridge and its writer, you can burn the binary and run it on real hardware.
 
-- Download visualboyadvance-m and extract
-- mkdir and put visualboyadvance-m and toyshader.bin
-- create a start.bat file contains 
+#### as a multiboot binary
 
-      start /max visulaboyadvance-m toyshader.bin
+tinygo's GBA target put the stack on the internal work ram, the heap on the onboard external work ram 
+and the program code on the rom area starting from 0x08000000. 
 
-- click start.bat to start and CTL-Q to quit
+GBA's multiboot mode load progarm at external ram (0x02000000). 
+If you want to load the binary on real hardware with multiboot cable, you need to modify the tinygo itself.
+
+pull the tinygo source from github and replace MEMORY directive in the tinygo/target/gameboy-advance.ld 
+
+```
+MEMORY {
+    ewram   : ORIGIN = 0x02020000, LENGTH = 128K /* upper half of on-board work RAM (2 wait states) */
+    iwram   : ORIGIN = 0x03000000, LENGTH = 32K-96 /* in-chip work RAM (faster) */
+    rom     : ORIGIN = 0x02000000, LENGTH = 128K  /* lower half of the on-board work RAM */  
+}
+```
+
+and then build tinygo from the source. 
 
 ### Acknowledgements
 
-- [VisualBoyAdvance](https://board.vba-m.com/) I 'd like to use raw binary as ROM, without fake Nintendo's logo.
+- [mgba](https://mgba.io/)  
 - [TinyGo](https://tinygo.org/) for easy and stable ARM cross compile.
 - [META Gameboy Advance Blog](https://remyhax.xyz/posts/gba-blog/) for how to handle Keys.
